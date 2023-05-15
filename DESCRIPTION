@@ -1,0 +1,70 @@
+Package: PiP
+Type: Package
+Title: Protocol for the software suite centering on Pi
+Version: 1.0.0
+Date: 2023-5-15
+Authors@R: c(person("Hai", "Fang", email="fh12355@rjh.com.cn", role=c("aut","cre")))
+Maintainer: Hai Fang <fh12355@rjh.com.cn>
+Depends: R (>= 4.3.0), igraph, ggplot2
+Imports: BiocGenerics, dplyr, forcats, GenomicRanges, ggnetwork, ggrepel, IRanges, magrittr, Matrix, methods, osfr, purrr, readr, stats, stringr, tibble, tidyr, XML, pbapply, curl, ggraph
+Suggests: coin, foreach, ggridges, grid, gridExtra, RColorBrewer, ROCR, ggupset, rtracklayer, Gviz, MASS, dnet, graphics, grDevices, S4Vectors, utils, ggbio, GenomeInfoDb, doParallel, fgsea, scales, supraHex, data.tree, jsonlite
+Description: In biomedical research, genomics experiments generate a wealth body of summary data, as highlighted by summary statistics arising from genome-wide association studies (GWAS). Computational analyses of these summary-level genomic data are critical for knowledge discovery, particularly for their translational use in therapeutic target identification and validation. In this aspect, we are leading the field by developing and deploying software tools, particularly Priority index (Pi) that have been verified to be cost-effective. Here we introduce a step-by-step protocol (PiP) for the software suite centering on Pi, an end-to-end pipeline that facilitates efficient and reproducible genomics-led target prioritisation and drug discovery; done so through leveraging multi-layered genomic summary datasets (generated from GWAS, QTL mapping, PCHi-C, and many other genomic studies) and the network knowledge of protein interactions. Incorporating our previously established approaches that have stood the test of time, our protocol delivers three closely related tasks: (1) how to prioritise target genes across the genome from GWAS summary statistics for a given disease; (2) how to evaluate the performance of target prioritisations in recovering known therapeutic targets; and (3) how to identify pathway crosstalk genes and how to perform crosstalk-based removal analysis for repurposing approved drugs, individually or in combination. The PiP is executed within 1 hour and is targeted to researchers in academia and pharma who are familiar with the R working environment.
+Collate:
+	 'ClassMethod-PiP.r'
+     'oRDS.r'
+     'oDefineNet.r'
+     'oIG2TB.r'
+     'oTB2IG.r'
+     'oPierSNPsAdv.r'
+     'oPierSNPs.r'
+     'oSNPscores.r'
+     'oSNP2nGenes.r'
+     'oSNPlocations.r'
+     'oSymbol2GeneID.r'
+     'oSNP2eGenes.r'
+     'oDefineQTL.r'
+     'oSNP2cGenes.r'
+     'oDefineRGB.r'
+     'oGR.r'
+     'oSparseMatrix.r'
+     'oSM2DF.r'
+     'oPierGenes.r'
+     'oPier.r'
+     'oRWR.r'
+     'oCheckParallel.r'
+     'oPierMatrix.r'
+     'oClassifyPerf.r'
+     'oClassifyComp.r'
+     'oHeatmap.r'
+     'oColormap.r'
+     'oPierManhattan.r'
+     'oPierGSEA.r'
+     'oGSEAdotplot.r'
+     'oRepurpose.r'
+     'oBicreate.r'
+     'oHEB.r'
+     'oSEA.r'
+     'oSEAextract.r'
+     'oSEAadv.r'
+     'oSEAdotplot.r'
+     'oDAGinduce.r'
+     'oSEAggraph.r'
+     'oGGraph.r'
+     'oBigraph.r'
+     'oNetInduce.r'
+     'oAddCoords.r'
+     'oLayout.r'
+     'oGGnetwork.r'
+     'oSEAforest.r'
+     'oSEAupset.r'
+     'oCombineNet.r'
+     'oPierSubnet.r'
+     'oSubneterGenes.r'
+     'oSEAballoon.r'
+     'oGSsimulator.r'
+     'oAttack.r'
+     'oUpsetAdv.r'
+     'oTIG.r'
+     'oBiproject.r'
+License: GPL-2
+biocViews: SystemsBiology, FunctionalGenomics, GenePrediction, GeneTarget, Pathways, Network
