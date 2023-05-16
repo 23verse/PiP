@@ -64,7 +64,7 @@ forced to be false}
 \value{
 an object of class "eGSEA", a list with following components:
 \itemize{
-\item{\code{df_summary}: a data frame of nTerm x 9 containing gene set
+\item{\code{df_summary}: a data frame of nTerm x 12 containing gene set
 enrichment analysis result, where nTerm is the number of
 terms/genesets, and the 9 columns are "setID" (i.e. "Term ID"), "nAnno"
 (i.e. number in members annotated by a term), "nLead" (i.e. number in
@@ -73,7 +73,8 @@ members as leading genes), "peak" (i.e. the rank at peak), "total"
 score), "nes" (i.e. normalised enrichment score; enrichment score but
 after being normalised by gene set size), "pvalue" (i.e. nominal p
 value), "adjp" (i.e. adjusted p value; p value but after being adjusted
-for multiple comparisons)}
+for multiple comparisons), "frac" (nLead/nAnno), "member" (members at
+the leading edge), and "member_rank" (members and their ranks)}
 \item{\code{leading}: a list of gene sets, each storing leading gene
 info (i.e. the named vector with names for gene symbols and elements
 for priority rank). Always, gene sets are identified by "setID"}
