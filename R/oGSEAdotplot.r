@@ -148,18 +148,18 @@ oGSEAdotplot <- function(eGSEA, top=1, colormap="spectral", zlim=NULL, ncolors=6
 			}
 			
 			if(is.null(df_genes_query)){
-				if(leading.label.direction=='no'){
+				if(leading.label.direction=='none'){
 					bp <- bp + ggrepel::geom_text_repel(data=df_genes, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), force=leading.force, max.overlaps=Inf, ...)
 				}else{
-					bp <- bp + ggrepel::geom_text_repel(data=df_genes, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), max.overlaps=Inf, direction="y", hjust=0, nudge_x=-1*df_genes$Rank, ...)
+					bp <- bp + ggrepel::geom_text_repel(data=df_genes, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), max.overlaps=Inf, direction="y", hjust=0, nudge_x=-1*df_genes$Rank-0.05*df_leading$Rank, ...)
 				}
 				
 			}else{
 				if(leading.query.only){
-					if(leading.label.direction=='no'){
+					if(leading.label.direction=='none'){
 						bp <- bp + ggrepel::geom_text_repel(data=df_genes_query, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), force=leading.force, max.overlaps=Inf, ...)
 					}else{
-						bp <- bp + ggrepel::geom_text_repel(data=df_genes_query, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), max.overlaps=Inf, direction="y", hjust=0, nudge_x=-1*df_genes_query$Rank, ...)
+						bp <- bp + ggrepel::geom_text_repel(data=df_genes_query, aes(x=Rank,y=RES,label=GeneID), lineheight=0.8, size=leading.size, color=leading.color, alpha=leading.alpha, fontface='italic', box.padding=unit(0.5,"lines"), point.padding=unit(leading.padding,"lines"), segment.color='grey80', segment.alpha=0.5, segment.size=0.2, arrow=arrow(length=unit(leading.arrow,'npc')), max.overlaps=Inf, direction="y", hjust=0, nudge_x=-1*df_genes_query$Rank-0.05*df_leading$Rank, ...)
 					}
 					
 				}else{
