@@ -38,6 +38,7 @@ Collate:
 	'oPierGSEA.r'
 	'oGSEAdotplot.r'
 	'oRepurpose.r'
+	'oBicreate.r'
 	'oSEA.r'
 	'oSEAextract.r'
 	'oSEAadv.r'
@@ -54,5 +55,6 @@ Collate:
 	'oAttack.r'
 	'oUpsetAdv.r'
 	'oTIG.r'
+	'oBiproject.r'
 License: GPL-2
 biocViews: SystemsBiology, FunctionalGenomics, GenePrediction, GeneTarget, Pathways, Network
