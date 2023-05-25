@@ -1,6 +1,6 @@
 #' Function to visualise effect-by-removal using a upset plot
 #'
-#' \code{oAttackUpset} is supposed to visualise effect-by-removal using a upset plot. The top is the kite plot, and visualised below is the combination matrix for nodes removed. It returns an object of class "ggplot".
+#' \code{oVisAttack} is supposed to visualise effect-by-removal using a upset plot. The top is the kite plot, and visualised below is the combination matrix for nodes removed. It returns an object of class "ggplot".
 #'
 #' @param data a data frame. It contains all these columns including  'frac.disconnected', 'nodes.removed' and 'i' (number of nodes removed)
 #' @param color the point color
@@ -10,18 +10,18 @@
 #' @return an object of class "ggplot"
 #' @note none
 #' @export
-#' @seealso \code{\link{oAttackUpset}}
-#' @include oAttackUpset.r
+#' @seealso \code{\link{oVisAttack}}
+#' @include oVisAttack.r
 #' @examples
 #' \dontrun{
 #' obj %>% transmute(value=nO, member=overlap) -> data
 #' #data %>% arrange(-value) %>% mutate(member=fct_inorder(member)) -> data
-#' data %>% oAttackUpset() -> gp
+#' data %>% oVisAttack() -> gp
 #' gp + geom_point(aes(fill=as.factor(i)), shape=22, size=2, color="transparent") + geom_line(aes(group=i,color=as.factor(i)))
 #' 
 #' # customised levels for members
 #' data %>% separate_rows(member,sep=',') %>% arrange(member) %>% pull(member) %>% unique() -> levels
-#' data %>% oAttackUpset(member.levels='customised',levels.customised=levels)
+#' data %>% oVisAttack(member.levels='customised',levels.customised=levels)
 #' }
 
 oVisAttack <- function(data, color="cyan4", shape=18, size=2, label.height.unit=6)

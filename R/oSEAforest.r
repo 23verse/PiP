@@ -26,7 +26,7 @@
 #' obj %>% oSEAextract() %>% filter(onto=='PSG') %>% oSEAforest()
 #' }
 
-oSEAforest <- function(obj, top=10, adjp.cutoff=0.05,  colormap="brewer.Reds", zlim=NULL, color.title=expression(-log[10]("adjp")), shape=18, size.range=c(0,1), slim=NULL, size.title="Overlap", wrap.width=NULL, legend.direction=c("auto","horizontal","vertical"), sortBy=c("or","none"))
+oSEAforest <- function(obj, top=10, adjp.cutoff=0.05,  colormap="brewer.Reds", zlim=NULL, color.title=expression(-log[10]("FDR")), shape=18, size.range=c(0,1), slim=NULL, size.title="Overlap", wrap.width=NULL, legend.direction=c("auto","horizontal","vertical"), sortBy=c("or","none"))
 {
     
 	## match.arg matches arg against a table of candidate values as specified by choices, where NULL means to take the first one

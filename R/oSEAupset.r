@@ -136,7 +136,7 @@ oSEAupset <- function(obj, top=10, adjp.cutoff=0.05, color="steelblue4", shape=1
 	########################
 	gp + ggupset::axis_combmatrix(sep=", |,", levels=levels) + ggupset::theme_combmatrix(combmatrix.panel.point.color.fill="steelblue", combmatrix.panel.point.color.empty="grey90", combmatrix.panel.point.size=1.5, combmatrix.panel.line.size=0.1, combmatrix.label.height=unit(label.height.unit*(length(levels)+1),"pt"), combmatrix.label.text=element_text(size=label.height.unit)) -> gp
 	#gp + facet_grid(.~namespace,scales="free_x",space="free_x")
-	gp <- gp + theme(axis.title.x=element_blank()) + ylab('-log10(adjP)')
+	gp <- gp + theme(axis.title.x=element_blank()) + ylab(expression(-log[10]("FDR")))
 	
 	## size
 	gp <- gp + scale_size_continuous(limits=slim, range=size.range, guide=guide_legend(size.title,title.position="top",keywidth=0.4,ncol=1,order=1))
