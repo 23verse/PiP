@@ -61,9 +61,9 @@ oAttack <- function(ig, measure=c('degree','betweenness','prerank','combine'), n
     	max.comp.removed <- rep(max.comp.orig, m)
     	nodes.removed <- rep(max.comp.orig, m)
     	removed.pct <- rep(max.comp.orig, m)
-    	pb <- dplyr::progress_estimated(m)
+    	#pb <- dplyr::progress_estimated(m)
    		for(i in seq_len(m)){
-   			pb$tick()$print()
+   			#pb$tick()$print()
    			ind <- match(V(ig)$name, nodes.combine[[i]])
    			v <- V(ig)$name[!is.na(ind)]
    			nodes.removed[i] <- paste(v,collapse=',')

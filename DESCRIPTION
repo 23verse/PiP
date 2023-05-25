@@ -56,5 +56,6 @@ Collate:
 	'oUpsetAdv.r'
 	'oTIG.r'
 	'oBiproject.r'
+	'oVisAttack.r'
 License: GPL-2
 biocViews: SystemsBiology, FunctionalGenomics, GenePrediction, GeneTarget, Pathways, Network
