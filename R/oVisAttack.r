@@ -24,7 +24,7 @@
 #' data %>% oVisAttack(member.levels='customised',levels.customised=levels)
 #' }
 
-oVisAttack <- function(data, color="cyan4", shape=18, size=2, label.height.unit=6)
+oVisAttack <- function(data, color="cyan4", shape=18, size=2, label.height.unit=7)
 {
     
 	i <- frac.disconnected <- nodes.removed <- NULL

@@ -114,7 +114,7 @@ oSEAupset <- function(obj, top=10, adjp.cutoff=0.05, color="steelblue4", shape=1
 	
 	###########################################
 	
-	df %>% ggplot(aes(x=name_overlap,y=-log10(adjp))) + geom_col(fill="steelblue", color='transparent', width=0.1, alpha=0.7) + geom_point(aes(size=nO), shape=shape, color=color, fill='white', alpha=0.6) + theme_classic() + theme(axis.title.x=element_blank()) + ggrepel::geom_text_repel(aes(label=name), color='steelblue4', size=2, segment.color='grey80', segment.alpha=0.5, max.overlaps=Inf) -> gp
+	df %>% ggplot(aes(x=name_overlap,y=-log10(adjp))) + geom_col(fill="steelblue", color='transparent', width=0.1, alpha=0.8) + geom_point(aes(size=nO), shape=shape, color=color, fill='white', alpha=0.8) + theme_classic() + theme(axis.title.x=element_blank()) + ggrepel::geom_text_repel(aes(label=name), color='black', size=2, segment.color='grey80', segment.alpha=0.5, max.overlaps=Inf) -> gp
 	
 	########################
 	levels <- NULL

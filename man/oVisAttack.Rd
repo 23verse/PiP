@@ -5,7 +5,7 @@
 \title{Function to visualise effect-by-removal using a upset plot}
 \usage{
 oVisAttack(data, color = "cyan4", shape = 18, size = 2,
-label.height.unit = 6)
+label.height.unit = 7)
 }
 \arguments{
 \item{data}{a data frame. It contains all these columns including
