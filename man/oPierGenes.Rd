@@ -29,6 +29,7 @@ restart = 0.7,
 normalise.affinity.matrix = c("none", "quantile"),
 parallel = TRUE,
 multicores = NULL,
+GR.Gene = c("UCSC_knownGene", "UCSC_knownCanonical"),
 verbose = TRUE,
 placeholder = NULL,
 guid = NULL
@@ -136,6 +137,19 @@ whether these two packages "foreach" and "doMC" have been installed}
 registered as the multicore parallel backend to the 'foreach' package.
 If NULL, it will use a half of cores available in a user's computer.
 This option only works when parallel computation is enabled}
+
+\item{GR.Gene}{the genomic regions of genes. By default, it is
+'UCSC_knownGene', that is, UCSC known genes (together with genomic
+locations) based on human genome assembly hg19. It can be
+'UCSC_knownCanonical', that is, UCSC known canonical genes (together
+with genomic locations) based on human genome assembly hg19.
+Alternatively, the user can specify the customised input. To do so,
+first save your RData file (containing an GR object) into your local
+computer, and make sure the GR object content names refer to Gene
+Symbols. Then, tell "GR.Gene" with your RData file name (with or
+without extension), plus specify your file RData path in
+"RData.location". Note: you can also load your customised GR object
+directly}
 
 \item{verbose}{logical to indicate whether the messages will be
 displayed in the screen. By default, it sets to true for display}

@@ -13,6 +13,7 @@
 #' @param normalise.affinity.matrix the way to normalise the output affinity matrix. It can be 'none' for no normalisation, 'quantile' for quantile normalisation to ensure that columns (if multiple) of the output affinity matrix have the same quantiles
 #' @param parallel logical to indicate whether parallel computation with multicores is used. By default, it sets to true, but not necessarily does so. Partly because parallel backends available will be system-specific (now only Linux or Mac OS). Also, it will depend on whether these two packages "foreach" and "doMC" have been installed
 #' @param multicores an integer to specify how many cores will be registered as the multicore parallel backend to the 'foreach' package. If NULL, it will use a half of cores available in a user's computer. This option only works when parallel computation is enabled
+#' @param GR.Gene the genomic regions of genes. By default, it is 'UCSC_knownGene', that is, UCSC known genes (together with genomic locations) based on human genome assembly hg19. It can be 'UCSC_knownCanonical', that is, UCSC known canonical genes (together with genomic locations) based on human genome assembly hg19. Alternatively, the user can specify the customised input. To do so, first save your RData file (containing an GR object) into your local computer, and make sure the GR object content names refer to Gene Symbols. Then, tell "GR.Gene" with your RData file name (with or without extension), plus specify your file RData path in "RData.location". Note: you can also load your customised GR object directly
 #' @param verbose logical to indicate whether the messages will be displayed in the screen. By default, it sets to true for display
 #' @param placeholder the characters to tell the location of built-in RDS files. See \code{\link{oRDS}} for details
 #' @param guid a valid (5-character) Global Unique IDentifier for an OSF project. See \code{\link{oRDS}} for details
@@ -42,7 +43,7 @@
 #' }
 
 
-oPierGenes <- function(data, network=c("STRING_highest","STRING_high","STRING_medium","STRING_low","PCommonsUN_high","PCommonsUN_medium","PCommonsDN_high","PCommonsDN_medium","PCommonsDN_Reactome","PCommonsDN_KEGG","PCommonsDN_HumanCyc","PCommonsDN_PID","PCommonsDN_PANTHER","PCommonsDN_ReconX","PCommonsDN_TRANSFAC","PCommonsDN_PhosphoSite","PCommonsDN_CTD", "KEGG","KEGG_metabolism","KEGG_genetic","KEGG_environmental","KEGG_cellular","KEGG_organismal","KEGG_disease","REACTOME"), STRING.only=c(NA,"neighborhood_score","fusion_score","cooccurence_score","coexpression_score","experimental_score","database_score","textmining_score")[1], weighted=FALSE, network.customised=NULL, seeds.inclusive=TRUE, normalise=c("laplacian","row","column","none"), restart=0.7, normalise.affinity.matrix=c("none","quantile"), parallel=TRUE, multicores=NULL, verbose=TRUE, placeholder=NULL, guid=NULL)
+oPierGenes <- function(data, network=c("STRING_highest","STRING_high","STRING_medium","STRING_low","PCommonsUN_high","PCommonsUN_medium","PCommonsDN_high","PCommonsDN_medium","PCommonsDN_Reactome","PCommonsDN_KEGG","PCommonsDN_HumanCyc","PCommonsDN_PID","PCommonsDN_PANTHER","PCommonsDN_ReconX","PCommonsDN_TRANSFAC","PCommonsDN_PhosphoSite","PCommonsDN_CTD", "KEGG","KEGG_metabolism","KEGG_genetic","KEGG_environmental","KEGG_cellular","KEGG_organismal","KEGG_disease","REACTOME"), STRING.only=c(NA,"neighborhood_score","fusion_score","cooccurence_score","coexpression_score","experimental_score","database_score","textmining_score")[1], weighted=FALSE, network.customised=NULL, seeds.inclusive=TRUE, normalise=c("laplacian","row","column","none"), restart=0.7, normalise.affinity.matrix=c("none","quantile"), parallel=TRUE, multicores=NULL, GR.Gene=c("UCSC_knownGene","UCSC_knownCanonical"), verbose=TRUE, placeholder=NULL, guid=NULL)
 {
 
     startT <- Sys.time()
@@ -101,16 +102,40 @@ oPierGenes <- function(data, network=c("STRING_highest","STRING_high","STRING_me
     
     #########################################################
     ## append "description" to both pNode$g  pNode$priority
-    if (is(pNode,"pNode")){
+    if(is(pNode,"pNode")){
+    
+		##########################
+		if(is(GR.Gene,"GRanges")){
+			gr_Gene <- GR.Gene
+		}else{
+			gr_Gene <- oRDS(GR.Gene[1], verbose=verbose, placeholder=placeholder, guid=guid)
+			if(is.null(gr_Gene)){
+				GR.Gene <- "UCSC_knownGene"
+				if(verbose){
+					message(sprintf("Instead, %s will be used", GR.Gene), appendLF=TRUE)
+				}
+				gr_Gene <- oRDS(GR.Gene, verbose=verbose, placeholder=placeholder, guid=guid)
+			}
+		}
+		##########################
+    
 		if(is.null(igraph::vertex_attr(pNode$g, "description"))){
-			### add description
-			V(pNode$g)$description <- oSymbol2GeneID(V(pNode$g)$name, details=TRUE, verbose=verbose, placeholder=placeholder, guid=guid)$description
-			###
+			### add description (based on NCBI genes)
+			#V(pNode$g)$description <- oSymbol2GeneID(V(pNode$g)$name, details=TRUE, verbose=verbose, placeholder=placeholder, guid=guid)$description
+			### add description (now based on UCSC genes)
+			ind <- match(V(pNode$g)$name, names(gr_Gene))
+			V(pNode$g)$description <- gr_Gene$Description[ind]
+			
 		}else{
 			ind <- which(is.na(V(pNode$g)$description))
 			if(length(ind)>0){
-				V(pNode$g)$description[ind] <- oSymbol2GeneID(V(pNode$g)$name[ind], details=TRUE, verbose=verbose, placeholder=placeholder, guid=guid)$description
+				### add description (based on NCBI genes)
+				#V(pNode$g)$description[ind] <- oSymbol2GeneID(V(pNode$g)$name[ind], details=TRUE, verbose=verbose, placeholder=placeholder, guid=guid)$description
+				### add description (now based on UCSC genes)
+				ind2 <- match(V(pNode$g)$name[ind], names(gr_Gene))
+				V(pNode$g)$description[ind] <- gr_Gene$Description[ind2]
 			}
+			
 		}
 		df_nodes <- igraph::get.data.frame(pNode$g, what="vertices")[,c("name","description")]
 		

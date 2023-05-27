@@ -149,7 +149,7 @@ oPierSNPs <- function(data, include.LD=NA, LD.customised=NULL, LD.r2=0.8, signif
     }
     
     if(relative.importance[2] != 0){
-		df_eGenes <- oSNP2eGenes(data=df_SNP$SNP, include.QTL=include.QTL, QTL.customised=QTL.customised, cdf.function=cdf.function, verbose=verbose, placeholder=placeholder, guid=guid)
+		df_eGenes <- oSNP2eGenes(data=df_SNP$SNP, include.QTL=include.QTL, QTL.customised=QTL.customised, GR.Gene=GR.Gene, cdf.function=cdf.function, verbose=verbose, placeholder=placeholder, guid=guid)
 	}else{
 		df_eGenes <- NULL
 		
@@ -174,7 +174,7 @@ oPierSNPs <- function(data, include.LD=NA, LD.customised=NULL, LD.r2=0.8, signif
     }
     
     if(relative.importance[3] != 0){
-		df_cGenes <- oSNP2cGenes(data=df_SNP$SNP, entity="SNP", include.RGB=include.RGB, GR.SNP=GR.SNP, cdf.function=cdf.function, verbose=verbose, placeholder=placeholder, guid=guid)
+		df_cGenes <- oSNP2cGenes(data=df_SNP$SNP, entity="SNP", include.RGB=include.RGB, GR.SNP=GR.SNP, GR.Gene=GR.Gene, cdf.function=cdf.function, verbose=verbose, placeholder=placeholder, guid=guid)
 	}else{
 		df_cGenes <- NULL
 		
@@ -287,7 +287,7 @@ oPierSNPs <- function(data, include.LD=NA, LD.customised=NULL, LD.r2=0.8, signif
         message(sprintf("#######################################################"))
     }
     
-	pNode <- suppressMessages(oPierGenes(data=seeds.genes, network=network, weighted=weighted, network.customised=network.customised, seeds.inclusive=seeds.inclusive, normalise=normalise, restart=restart, normalise.affinity.matrix=normalise.affinity.matrix, parallel=parallel, multicores=multicores, verbose=verbose, placeholder=placeholder, guid=guid))
+	pNode <- suppressMessages(oPierGenes(data=seeds.genes, network=network, weighted=weighted, network.customised=network.customised, seeds.inclusive=seeds.inclusive, normalise=normalise, restart=restart, normalise.affinity.matrix=normalise.affinity.matrix, parallel=parallel, multicores=multicores, GR.Gene=GR.Gene, verbose=verbose, placeholder=placeholder, guid=guid))
 	
 	if(verbose){
         message(sprintf("#######################################################"))
@@ -356,7 +356,6 @@ oPierSNPs <- function(data, include.LD=NA, LD.customised=NULL, LD.r2=0.8, signif
     pNode[['nGenes']] <- nGenes
     pNode[['eGenes']] <- eGenes
     pNode[['cGenes']] <- cGenes
-
 	
     ####################################################################################
     endT <- Sys.time()

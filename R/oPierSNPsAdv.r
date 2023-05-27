@@ -122,7 +122,7 @@ oPierSNPsAdv <- function(data, include.LD=NA, LD.customised=NULL, LD.r2=0.8, sig
 			# assume a file
 			df <- utils::read.delim(file=QTL.customised, header=TRUE, row.names=NULL, stringsAsFactors=FALSE)
 		}else if(is.matrix(QTL.customised) | is.data.frame(QTL.customised)){
-			df <- QTL.customised
+			df <- QTL.customised %>% as.data.frame()
 		}
 		
 		if(!is.null(df)){
