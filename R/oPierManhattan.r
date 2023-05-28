@@ -63,13 +63,17 @@ oPierManhattan <- function(pNode, color=c("darkred","steelblue4"), point.size=0.
 		now <- Sys.time()
 		message(sprintf("Load positional information for Genes (%s) ...", as.character(now)), appendLF=TRUE)
 	}
-    gr_Gene <- oRDS(GR.Gene[1], verbose=verbose, placeholder=placeholder, guid=guid)
-    if(is.null(gr_Gene)){
-    	GR.Gene <- "UCSC_knownGene"
-		if(verbose){
-			message(sprintf("Instead, %s will be used", GR.Gene), appendLF=TRUE)
+	if(is(GR.Gene,"GRanges")){
+		gr_Gene <- GR.Gene
+	}else{	
+		gr_Gene <- oRDS(GR.Gene[1], verbose=verbose, placeholder=placeholder, guid=guid)
+		if(is.null(gr_Gene)){
+			GR.Gene <- "UCSC_knownGene"
+			if(verbose){
+				message(sprintf("Instead, %s will be used", GR.Gene), appendLF=TRUE)
+			}
+			gr_Gene <- oRDS(GR.Gene, verbose=verbose, placeholder=placeholder, guid=guid)
 		}
-    	gr_Gene <- oRDS(GR.Gene, verbose=verbose, placeholder=placeholder, guid=guid)
     }
     
     ## ONLY restricted to genes with genomic locations

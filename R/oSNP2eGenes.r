@@ -141,8 +141,26 @@ oSNP2eGenes <- function(data, include.QTL=NA, QTL.customised=NULL, GR.Gene=c("UC
 	# only keep those genes with genomic positions
 	####################################
 	if(!is.null(df_eGenes)){
-		ind <- oSymbol2GeneID(df_eGenes$Gene, details=FALSE, verbose=verbose, placeholder=placeholder, guid=guid)
-		df_eGenes <- df_eGenes[!is.na(ind), ]
+		#ind <- oSymbol2GeneID(df_eGenes$Gene, details=FALSE, verbose=verbose, placeholder=placeholder, guid=guid)
+		#df_eGenes <- df_eGenes[!is.na(ind), ]
+		
+		##########################
+		if(is(GR.Gene,"GRanges")){
+			gr_Gene <- GR.Gene
+		}else{
+			gr_Gene <- oRDS(GR.Gene[1], verbose=verbose, placeholder=placeholder, guid=guid)
+			if(is.null(gr_Gene)){
+				GR.Gene <- "UCSC_knownGene"
+				if(verbose){
+					message(sprintf("Instead, %s will be used", GR.Gene), appendLF=TRUE)
+				}
+				gr_Gene <- oRDS(GR.Gene, verbose=verbose, placeholder=placeholder, guid=guid)
+			}
+		}
+		##########################
+		ind <- match(df_eGenes$Gene, names(gr_Gene))
+		df_eGenes <- df_eGenes[!is.na(ind), ] %>% as.data.frame()
+		
 		if(nrow(df_eGenes)==0){
 			df_eGenes <- NULL
 		}
