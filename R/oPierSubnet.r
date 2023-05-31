@@ -28,7 +28,7 @@
 #' subnet <- oPierSubnet(pNode, priority.quantile=0.1, subnet.size=50)
 #' }
 
-oPierSubnet <- function(pNode, priority.quantile=0.1, network=NA, STRING.only=NA, network.customised=NULL, subnet.significance=0.01, subnet.size=NULL, test.permutation=FALSE, num.permutation=100, respect=c("none","degree"), aggregateBy=c("Ztransform","fishers","logistic","orderStatistic"), verbose=TRUE, placeholder=NULL, guid=NULL)
+oPierSubnet <- function(pNode, priority.quantile=0.1, network=NA, STRING.only=NA, network.customised=NULL, subnet.significance=0.01, subnet.size=NULL, test.permutation=FALSE, num.permutation=100, respect=c("none","degree"), aggregateBy=c("fishers","Ztransform","logistic","orderStatistic"), verbose=TRUE, placeholder=NULL, guid=NULL)
 {
 
     startT <- Sys.time()

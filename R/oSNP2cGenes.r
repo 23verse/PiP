@@ -53,7 +53,31 @@ oSNP2cGenes <- function(data, entity=c("SNP","chr:start-end","data.frame","bed",
 	##################
 		
 	## only data
-	df_data <- oDefineRGB(data=data, entity=entity, include.RGB=include.RGB, GR.SNP=GR.SNP, verbose=verbose, placeholder=placeholder, guid=guid)
+	if(0){
+		# Previously (functional)
+		df_data <- oDefineRGB(data=data, entity=entity, include.RGB=include.RGB, GR.SNP=GR.SNP, verbose=verbose, placeholder=placeholder, guid=guid)
+	
+	}else{
+		#########################################################
+		# NOW (functionally similar to the above)
+		# avoid the reuse of oDefineRGB running twice
+		nodes_gr <- oGR(data=df_FTS[,1], format="chr:start-end", verbose=verbose, placeholder=placeholder, guid=guid)
+				
+		data_gr <- oSNPlocations(data, GR.SNP=GR.SNP, verbose=verbose, placeholder=placeholder, guid=guid)
+				
+		maxgap <- -1L
+		minoverlap <- 0L
+		subject <- nodes_gr
+		query <- data_gr
+		q2r <- GenomicRanges::findOverlaps(query=query, subject=subject, maxgap=maxgap, minoverlap=minoverlap, type="any", select="all", ignore.strand=TRUE) %>% as.data.frame()
+
+		res_df <- tibble::tibble(SNP=names(data_gr)[q2r[,1]], GR=names(nodes_gr)[q2r[,2]])
+		
+		GR <- Gene <- Context <- SNP <- Score <- NULL
+		
+		df_data <- res_df %>% dplyr::inner_join(df_FTS, by='GR') %>% transmute(GR=GR, Gene=Gene, Score=Score, Context=Context, SNP=SNP)
+		#########################################################
+	}
 	
 	GR <- Gene <- uid <- SNP <- Score <- Weight <- NULL
 	
