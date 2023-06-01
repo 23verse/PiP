@@ -39,7 +39,7 @@
 #' dTarget <- oPierMatrix(ls_pNode, displayBy="pvalue", aggregateBy="fishers")
 #' }
 
-oPierMatrix <- function(list_pNode, displayBy=c("score","rank","weight","pvalue","evidence"), combineBy=c('union','intersect'), aggregateBy=c("none","fishers","logistic","Ztransform","orderStatistic","harmonic","max","sum"), rangeMax=5, keep=TRUE, GR.Gene=c("UCSC_knownGene","UCSC_knownCanonical"), verbose=TRUE, placeholder=NULL, guid=NULL)
+oPierMatrix <- function(list_pNode, displayBy=c("score","rank","weight","pvalue","evidence"), combineBy=c('union','intersect'), aggregateBy=c("none","fishers","logistic","Ztransform","orderStatistic","harmonic","max","sum"), rangeMax=5, keep=FALSE, GR.Gene=c("UCSC_knownGene","UCSC_knownCanonical"), verbose=TRUE, placeholder=NULL, guid=NULL)
 {
 
     startT <- Sys.time()

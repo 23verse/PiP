@@ -75,7 +75,7 @@ oSNP2cGenes <- function(data, entity=c("SNP","chr:start-end","data.frame","bed",
 		
 		GR <- Gene <- Context <- SNP <- Score <- NULL
 		
-		df_data <- res_df %>% dplyr::inner_join(df_FTS, by='GR') %>% transmute(GR=GR, Gene=Gene, Score=Score, Context=Context, SNP=SNP)
+		df_data <- res_df %>% dplyr::inner_join(df_FTS, by='GR') %>% dplyr::transmute(GR=GR, Gene=Gene, Score=Score, Context=Context, SNP=SNP)
 		#########################################################
 	}
 	
