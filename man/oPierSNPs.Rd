@@ -45,8 +45,6 @@ seeds.inclusive = TRUE,
 normalise = c("laplacian", "row", "column", "none"),
 restart = 0.7,
 normalise.affinity.matrix = c("none", "quantile"),
-parallel = TRUE,
-multicores = NULL,
 verbose = TRUE,
 placeholder = NULL,
 guid = NULL
@@ -250,17 +248,6 @@ affinity matrix. It can be 'none' for no normalisation, 'quantile' for
 quantile normalisation to ensure that columns (if multiple) of the
 output affinity matrix have the same quantiles}
 
-\item{parallel}{logical to indicate whether parallel computation with
-multicores is used. By default, it sets to true, but not necessarily
-does so. Partly because parallel backends available will be
-system-specific (now only Linux or Mac OS). Also, it will depend on
-whether these two packages "foreach" and "doMC" have been installed}
-
-\item{multicores}{an integer to specify how many cores will be
-registered as the multicore parallel backend to the 'foreach' package.
-If NULL, it will use a half of cores available in a user's computer.
-This option only works when parallel computation is enabled}
-
 \item{verbose}{logical to indicate whether the messages will be
 displayed in the screen. By default, it sets to true for display}
 
@@ -303,9 +290,8 @@ SNPs together with the significance level. To prioritise genes, it
 first defines and scores seed genes: nearby genes, eQTL genes and Hi-C
 genes. With seed genes and their scores, it then uses Random Walk with
 Restart (RWR) to calculate the affinity score of all nodes in the input
-graph to the seed genes. The priority score is the affinity score.
-Parallel computing is also supported for Linux-like or Windows
-operating systems. It returns an object of class "pNode".
+graph to the seed genes. The priority score is the affinity score. It
+returns an object of class "pNode".
 }
 \note{
 The prioritisation procedure (from SNPs to target genes) consists of

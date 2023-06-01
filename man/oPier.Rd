@@ -11,8 +11,6 @@ seeds.inclusive = TRUE,
 normalise = c("laplacian", "row", "column", "none"),
 restart = 0.7,
 normalise.affinity.matrix = c("none", "quantile"),
-parallel = TRUE,
-multicores = NULL,
 verbose = TRUE
 )
 }
@@ -51,17 +49,6 @@ affinity matrix. It can be 'none' for no normalisation, 'quantile' for
 quantile normalisation to ensure that columns (if multiple) of the
 output affinity matrix have the same quantiles}
 
-\item{parallel}{logical to indicate whether parallel computation with
-multicores is used. By default, it sets to true, but not necessarily
-does so. Partly because parallel backends available will be
-system-specific (now only Linux or Mac OS). Also, it will depend on
-whether these two packages "foreach" and "doMC" have been installed}
-
-\item{multicores}{an integer to specify how many cores will be
-registered as the multicore parallel backend to the 'foreach' package.
-If NULL, it will use a half of cores available in a user's computer.
-This option only works when parallel computation is enabled}
-
 \item{verbose}{logical to indicate whether the messages will be
 displayed in the screen. By default, it sets to true for display}
 }
@@ -81,9 +68,8 @@ rescaled to the range [0,1]), "rank" (ranks of the priority scores)}
 \code{oPier} is supposed to prioritise nodes given an input graph and a
 list of seed nodes. It implements Random Walk with Restart (RWR) and
 calculates the affinity score of all nodes in the graph to the seeds.
-The priority score is the affinity score. Parallel computing is also
-supported for Linux-like or Windows operating systems. It returns an
-object of class "pNode".
+The priority score is the affinity score. It returns an object of class
+"pNode".
 }
 \note{
 The input graph will treat as an unweighted graph if there is no
