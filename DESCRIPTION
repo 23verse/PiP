@@ -2,7 +2,7 @@ Package: PiP
 Type: Package
 Title: Protocols using the software suite centering on Pi
 Version: 1.0.0
-Date: 2023-6-1
+Date: 2023-6-3
 Authors@R: c(person("Hai", "Fang", email="fh12355@rjh.com.cn", role=c("aut","cre")))
 Maintainer: Hai Fang <fh12355@rjh.com.cn>
 Depends: R (>= 4.3.0), igraph, ggplot2
