@@ -45,8 +45,8 @@
 #' grid.arrange(grobs=ls_gp, ncol=2)
 #' }
 
-oGSEAdotplot <- function(eGSEA, top=1, colormap="spectral", zlim=NULL, ncolors=64, xlab=NULL, title=c('setID','none'), subtitle=c('leading','enrichment','both','none'), clab='Priority\nrating', x.scale=c("normal","sqrt","log"), peak=TRUE, peak.color='black', leading=FALSE, leading.size=2, leading.color='steelblue4', leading.alpha=1, leading.padding=0.2, leading.arrow=0.01, leading.force=0.01, leading.query=NULL, leading.query.only=FALSE, leading.edge.only=FALSE, leading.label.direction=c("none","left"), compact=FALSE, font.family="sans", ...)
-{
+oGSEAdotplot <- function(eGSEA, top=1, colormap="spectral", zlim=NULL, ncolors=64, xlab=NULL, title=c('setID','none'), subtitle=c('leading','enrichment','both','none'), clab='Priority\nrating', x.scale=c("normal","sqrt","log"), peak=TRUE, peak.color='black', leading=FALSE, leading.size=2.5, leading.color='steelblue4', leading.alpha=1, leading.padding=0.2, leading.arrow=0.01, leading.force=0.01, leading.query=NULL, leading.query.only=FALSE, leading.edge.only=FALSE, leading.label.direction=c("none","left"), compact=FALSE, font.family="sans", ...)
+{3
 	
 	x.scale <- match.arg(x.scale)
 	title <- match.arg(title)
@@ -224,7 +224,7 @@ oGSEAdotplot <- function(eGSEA, top=1, colormap="spectral", zlim=NULL, ncolors=6
 			subtitle <- ''
 		}
 		if(subtitle!=''){
-			bp <- bp + labs(title=title, subtitle=subtitle) + theme(plot.title=element_text(hjust=0.5,size=10), plot.subtitle=element_text(hjust=0.5,,size=8))
+			bp <- bp + labs(title=title, subtitle=subtitle) + theme(plot.title=element_text(hjust=0.5,size=10), plot.subtitle=element_text(hjust=0.5,size=8))
 		}else{
 			if(!is.na(title)){
 				bp <- bp + labs(title=title) + theme(plot.title=element_text(hjust=0.5,size=12))
