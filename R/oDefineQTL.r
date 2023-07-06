@@ -133,8 +133,12 @@ oDefineQTL <- function(data=NULL, include.QTL=c(NA, "eQTL_xMEdb_Bcell","eQTL_xME
 				x <- x %>% str_replace('eQTL_eQTLCatalogue_','xQTLdb.eQTL_eQTLCatalogue_')
 				df <- oRDS(x, placeholder=placeholder, guid=guid, verbose=verbose) %>% as.data.frame()
 			
-			}else if(x=="pQTL_Plasma"){
-				df <- oRDS("xQTLdb.pQTL_Plasma", placeholder=placeholder, guid=guid, verbose=verbose) %>% as.data.frame()
+			#}else if(x=="pQTL_Plasma"){
+			#	df <- oRDS("xQTLdb.pQTL_Plasma", placeholder=placeholder, guid=guid, verbose=verbose) %>% as.data.frame()
+			
+			}else if(any(grepl("pQTL_Plasma", x, perl=TRUE))){
+				x <- x %>% str_replace('pQTL_Plasma','xQTLdb.pQTL_Plasma')
+				df <- oRDS(x, placeholder=placeholder, guid=guid, verbose=verbose) %>% as.data.frame()
 			
 			}else if(x=="eQTL_LCL"){
 				df <- oRDS("xQTLdb.eQTL_LCL", placeholder=placeholder, guid=guid, verbose=verbose) %>% as.data.frame()
