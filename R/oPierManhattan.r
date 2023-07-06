@@ -121,7 +121,7 @@ oPierManhattan <- function(pNode, color=c("darkred","steelblue4"), point.size=0.
 	priority <- seqnames <- priority <- NULL
 	###############################
 	## calling ggbio::autoplot
-	suppressMessages(ggp <- ggbio::autoplot(object=gr, aes(y=priority,color=seqnames,alpha=priority), coord="genome", geom='point', space.skip=0.01, size=point.size))
+	suppressWarnings(suppressMessages(ggp <- ggbio::autoplot(object=gr, aes(y=priority,color=seqnames,alpha=priority), coord="genome", geom='point', space.skip=0.01, size=point.size)))
 	
 	## extract ggplot
 	bp <- ggp@ggplot
